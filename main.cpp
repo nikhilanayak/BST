@@ -214,7 +214,7 @@ void add(Node*& root){ // add nunber to BST just like upload, but manually
 
 int main()
 {
-	srand(time(NULL)); // random seed
+	srand(time(0)); // random seed
 
 	Node *root = NULL;
 	Node *newPtr = NULL;
@@ -224,7 +224,7 @@ int main()
 		std::cout << "U=Upload File, A=Add, S=Search, D=Display, R=Remove, Q=Quit: ";
 		char input[256];
 		std::cin >> input;
-		switch (input[NULL]) // check first character to see what input was
+		switch (input[0]) // check first character to see what input was
 		{
 		case 'U':
 		{
