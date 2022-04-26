@@ -8,6 +8,8 @@ public:
 	int data; // this node's data
 	Node(int data){
 		this->data = data;
+		this->left = 0;
+		this->right = 0;
 	}
 
 	// setters

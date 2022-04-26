@@ -7,7 +7,7 @@
 #include <time.h>
 #include <cstring>
 
-bool search(Node *curr, int num, Node *&newPtr) // cehck if number exists in BST
+bool search(Node *curr, int num, Node *&newPtr) // check if number exists in BST
 {
 	if (curr->data == num)
 	{
