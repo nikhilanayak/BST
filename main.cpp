@@ -25,9 +25,10 @@ bool search(Node *curr, int num, Node *&newPtr) // check if number exists in BST
 	return false;
 }
 
+/*
 void remove(Node *&root, Node *curr, int num, Node *newPtr)
 {  // remove number from BST, covers all edge cases
-	if (search(curr, num, newPtr) == true)
+	if (search(curr, num, newPtr))
 	{  // if the number exists. Don't delete if it doesn't exist
 		Node *tmp = newPtr;
 		if (tmp == root)
@@ -125,6 +126,45 @@ void remove(Node *&root, Node *curr, int num, Node *newPtr)
 			}
 		}
 	}
+}
+*/
+
+
+Node* remove(Node* head, int toDelete){
+	Node* left = head->left;
+	Node* right = head->right;
+
+	if(head == NULL) return head;
+	else if(toDelete < head->data){ // on the left size of the tree
+		head->left = remove(left, toDelete);
+		return head;
+	}
+	else if(toDelete > head->data){ // on the right side of the tree
+		head->right = remove(right, toDelete);
+		return head;
+	}
+	else{ // delete the root
+		if(head->right == NULL && head->left == NULL){ // no children, can just wipe the tree
+			return NULL;
+		}
+		else if(head->left == NULL){ // wipe the left side and make the right the root
+			return head->right;
+		}
+		else if(head->right == NULL){ // do the opposite as above
+			return head->left;
+		}
+		else{ // move down and recurse
+			Node* tmp = head->right;
+			while(tmp->left != NULL) tmp = tmp->left;
+
+			head->data = tmp->data;
+			Node* rt = head->right;
+			head->right = remove(rt, tmp->data);
+			return head;
+		}
+		
+	}
+
 }
 
 void recursiveAdd(Node *curr, int value)
@@ -226,6 +266,10 @@ int main()
 		std::cin >> input;
 		switch (input[0]) // check first character to see what input was
 		{
+		case '#': {
+				
+			break;
+		};
 		case 'U':
 		{
 			upload(root);
@@ -262,7 +306,7 @@ int main()
 			std::cout << "What would you like to remove: ";
 			int toremove;
 			std::cin >> toremove;
-			remove(root, root, toremove, newPtr);
+			root = remove(root, toremove);
 			break;
 		};
 
